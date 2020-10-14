@@ -1,9 +1,0 @@
-{
-  "name": "sendgrid-slack",
-  "version": "0.1.0",
-  "description": "Send Sendgrid webhook events to Slack",
-  "main": "index.js",
-  "repository": "https://github.com/nicolasrouanne/slack-sendgrid",
-  "author": "Nicolas Rouanne <nico.rouanne@gmail.com>",
-  "license": "MIT"
-}
