@@ -4,6 +4,7 @@ import { fromUnixTime } from "date-fns";
 import { format, utcToZonedTime } from "date-fns-tz";
 import fr from "date-fns/locale/fr";
 
+const REGION = "europe-west1";
 const SLACK_WEBHOOK_URL =
   "https://hooks.slack.com/services/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";
 
@@ -87,7 +88,7 @@ const sendToSlack = (message: SlackPayload) => {
   });
 };
 
-export const process = functions.https.onRequest((req, res) => {
+export const process = functions.region(REGION).https.onRequest((req, res) => {
   if (req.body && Array.isArray(req.body)) {
     const events = parseSendgridEvents(req.body);
     events.forEach((event) => {
