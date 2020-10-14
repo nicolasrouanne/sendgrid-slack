@@ -5,8 +5,7 @@ import { format, utcToZonedTime } from "date-fns-tz";
 import fr from "date-fns/locale/fr";
 
 const REGION = "europe-west1";
-const SLACK_WEBHOOK_URL =
-  "https://hooks.slack.com/services/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";
+const SLACK_WEBHOOK_URL = functions.config().slack.url;
 
 interface SlackElement {
   type: string;
