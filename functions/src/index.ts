@@ -1,27 +1,19 @@
 import * as functions from "firebase-functions";
-import fetch from "node-fetch";
+import {
+  WebClient,
+  ContextBlock,
+  SectionBlock,
+  KnownBlock,
+} from "@slack/web-api";
 import { fromUnixTime } from "date-fns";
 import { format, utcToZonedTime } from "date-fns-tz";
 import fr from "date-fns/locale/fr";
 
 const REGION = "europe-west1";
-const SLACK_WEBHOOK_URL = functions.config().slack.url;
 
-interface SlackElement {
-  type: string;
-  text?: string;
-  emoji?: boolean;
-}
-
-interface SlackBlock {
-  type: string;
-  text?: SlackElement;
-  elements?: SlackElement[];
-}
-
-interface SlackPayload {
-  blocks: SlackBlock[];
-}
+const SLACK_TOKEN = functions.config().slack.token;
+const SLACK_CHANNEL = functions.config().slack.channel;
+const slack = new WebClient(SLACK_TOKEN);
 
 interface SendgridEvent {
   email: string;
@@ -53,19 +45,15 @@ const slackPayload = ({
   email,
   reason,
 }: Omit<SendgridEvent, "timestamp"> & { time: string }) => {
-  const payload: SlackPayload = {
-    blocks: [
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `Email *${event}* for *${email}* at ${time}`,
-        },
-      },
-    ],
+  const messageBlock: SectionBlock = {
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `Email *${event}* for *${email}* at ${time}`,
+    },
   };
 
-  const errorBlock: SlackBlock = {
+  const errorBlock: ContextBlock = {
     type: "context",
     elements: [
       {
@@ -76,15 +64,13 @@ const slackPayload = ({
     ],
   };
 
-  if (reason) payload.blocks = [...payload.blocks, errorBlock];
-  return payload;
+  let blocks: KnownBlock[] = [messageBlock];
+  if (reason) blocks = [...blocks, errorBlock];
+  return blocks;
 };
 
-const sendToSlack = (message: SlackPayload) => {
-  fetch(SLACK_WEBHOOK_URL, {
-    method: "POST",
-    body: JSON.stringify(message),
-  });
+const sendToSlack = (blocks: KnownBlock[]) => {
+  slack.chat.postMessage({ channel: SLACK_CHANNEL, text: "", blocks });
 };
 
 export const process = functions.region(REGION).https.onRequest((req, res) => {
