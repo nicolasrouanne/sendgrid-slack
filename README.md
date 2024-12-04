@@ -10,7 +10,7 @@ You need to install [`node`](https://nodejs.org/) and `yarn`.
 The project is made to be deployed to [**Firebase Cloud Functions**](https://firebase.google.com/docs/functions/); this requires using `firebase-tools`
 
 ```sh
-yarn add global firebase-tools
+yarn global add firebase-tools
 ```
 
 To use `firebase-tools`, even in _development_, it is required to login
@@ -61,6 +61,10 @@ Otherwise, set this as the content of `functions/.runtimeconfig.json`:
 
 To set _environment variables_ in production use [`firebase functions:config:set`](https://firebase.google.com/docs/functions/config-env#set_environment_configuration_for_your_project).
 
+```sh
+ firebase functions:config:set slack.token=xoxb-.....-.....-......................
+```
+
 ### Start
 
 Run `yarn serve` to build and serve locally through _Firebase emulators_ 📡
@@ -73,7 +77,7 @@ The project is linted using [_TypeScript_](https://www.typescriptlang.org/) and 
 Run the linter manually to check your changes if needed:
 
 ```sh
-$ yarn lint
+yarn lint
 ```
 
 > **Deployment** 🚀 will run the linter and **fail the build** if any error is found. 👮‍♀️
@@ -87,7 +91,7 @@ We rely on **_Prettier_ default settings**, so no configuration file is needed/p
 Run `prettier` manually to format your files if needed:
 
 ```sh
-$ yarn format
+yarn format
 ```
 
 ## Ressources
@@ -97,7 +101,25 @@ $ yarn format
 _Slack_ integration is made using the [node SDK](https://github.com/slackapi/node-slack-sdk), and especially [`@slack/web-api`](https://slack.dev/node-slack-sdk/web-api). Messages are built using [_Block Kit_](https://api.slack.com/block-kit/building).
 
 This is what messages looks like:
+
 <img width="634" alt="Screen Shot 2020-10-15 at 10 15 22" src="https://user-images.githubusercontent.com/12157019/96095820-6e828a00-0ecf-11eb-8fa3-2d7a117e997b.png">
+
+### Slack
+
+#### Configuration
+
+In _Slack Apps_ > [_OAuth & Permissions_](https://api.slack.com/apps) > _Scopes_ add the following _Bot Token Scopes_:
+
+- `chat:write`
+- `incoming-webhook`
+
+![Slack bot token scopes](/docs/images/slack-bot-token-scopes.png)
+
+You then need to add the _Bot user_ to the channel you want to post messages to.
+
+```
+/invite @Sendgrid
+```
 
 ### Sendgrid
 
