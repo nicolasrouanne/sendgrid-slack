@@ -4,10 +4,9 @@ Webhook 🔗 parsing _Sendgrid_ 📬 events and sending them as notifications �
 
 <img width="556" alt="Screen Shot 2020-10-15 at 10 38 04" src="https://user-images.githubusercontent.com/12157019/96098548-89a2c900-0ed2-11eb-8d54-8cae76a1eded.png">
 
-
 ## Installation
 
-You need to install [`node`](https://nodejs.org/) and `yarn` or `npm`.
+You need to install [`node`](https://nodejs.org/) and `yarn`.
 The project is made to be deployed to [**Firebase Cloud Functions**](https://firebase.google.com/docs/functions/); this requires using `firebase-tools`
 
 ```sh
@@ -101,9 +100,12 @@ This is what messages looks like:
 <img width="634" alt="Screen Shot 2020-10-15 at 10 15 22" src="https://user-images.githubusercontent.com/12157019/96095820-6e828a00-0ecf-11eb-8fa3-2d7a117e997b.png">
 
 ### Sendgrid
+
 #### Configuration
-In _Sengrid Settings_ > [_Mail Settings_](https://app.sendgrid.com/settings/mail_settings), select the _Event webhook_  menu.
+
+In _Sengrid Settings_ > [_Mail Settings_](https://app.sendgrid.com/settings/mail_settings), select the _Event webhook_ menu.
 Select the events you want to be notified on and add the url of your _Firebase_ `production` webhook.
+
 ```
 https://europe-west1-sendgrid-yourfirebaseprojectname.cloudfunctions.net/process
 ```
@@ -111,6 +113,7 @@ https://europe-west1-sendgrid-yourfirebaseprojectname.cloudfunctions.net/process
 <img width="1675" alt="Screen Shot 2020-10-15 at 10 39 54" src="https://user-images.githubusercontent.com/12157019/96098769-ca9add80-0ed2-11eb-918f-4cb340242a4d.png">
 
 #### Events
+
 [Sengrid _events_](https://sendgrid.com/docs/for-developers/tracking-events/event/#events) look like this:
 
 ```json
