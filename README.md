@@ -99,6 +99,23 @@ _Slack_ integration is made using the [node SDK](https://github.com/slackapi/nod
 This is what messages looks like:
 <img width="634" alt="Screen Shot 2020-10-15 at 10 15 22" src="https://user-images.githubusercontent.com/12157019/96095820-6e828a00-0ecf-11eb-8fa3-2d7a117e997b.png">
 
+### Slack
+
+#### Configuration
+
+In _Slack Apps_ > [_OAuth & Permissions_](https://api.slack.com/apps) > _Scopes_ add the following _Bot Token Scopes_:
+
+- `chat:write`
+- `incoming-webhook`
+
+![Slack bot token scopes](/docs/images/slack-bot-token-scopes.png)
+
+You then need to add the _Bot user_ to the channel you want to post messages to.
+
+```
+/invite @Sendgrid
+```
+
 ### Sendgrid
 
 #### Configuration
