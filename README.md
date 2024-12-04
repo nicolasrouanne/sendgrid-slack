@@ -10,7 +10,7 @@ You need to install [`node`](https://nodejs.org/) and `yarn`.
 The project is made to be deployed to [**Firebase Cloud Functions**](https://firebase.google.com/docs/functions/); this requires using `firebase-tools`
 
 ```sh
-yarn add global firebase-tools
+yarn global add firebase-tools
 ```
 
 To use `firebase-tools`, even in _development_, it is required to login
