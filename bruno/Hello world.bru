@@ -1,0 +1,22 @@
+meta {
+  name: Hello world
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/process
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+      {
+          "email": "example@test.com",
+          "timestamp": 1733245398,
+          "event": "bounce",
+          "reason": "500 unknown recipient"
+      }
+  ]
+}

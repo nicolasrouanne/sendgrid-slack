@@ -94,6 +94,12 @@ Run `prettier` manually to format your files if needed:
 yarn format
 ```
 
+## Explore
+
+To test the API, you can use the [Bruno](https://www.usebruno.com/) API client. Open the collection and environments in the `bruno` folder using the Bruno app and make your HTTP requests on your `local` or `production` environment.
+
+![Bruno client](/docs/images/bruno.png)
+
 ## Ressources
 
 ### Slack messages
@@ -196,7 +202,7 @@ https://europe-west1-sendgrid-yourfirebaseprojectname.cloudfunctions.net/process
     "email": "example@test.com",
     "timestamp": 1513299569,
     "smtp-id": "<14c5d75ce93.dfd.64b469@ismtpd-555>",
-    "event": "dropped",
+    "event": "dropped",****
     "category": "cat facts",
     "sg_event_id": "sg_event_id",
     "sg_message_id": "sg_message_id",
